@@ -1,4 +1,4 @@
-package com.example.freshlin.frame;
+package com.example.freshlin.frame.test;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.freshlin.frame.R;
 
 /**
  * Created by freshlin on 2016/8/2.
