@@ -2,11 +2,6 @@ package com.example.freshlin.frame.test;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
 
 
 import com.example.freshlin.frame.R;
