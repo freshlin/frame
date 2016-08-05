@@ -1,11 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" 
+    android:orientation="vertical"
+    android:id="@+id/llyBase"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/appBackground">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/head_toolBar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
+        android:layout_height="?attr/toolbarHeight"
+        android:background="?attr/toolbarBackground">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/head_left"
+                android:layout_width="?attr/toolbarHeight"
+                android:layout_height="?attr/toolbarHeight"
+                android:scaleType="center"
+                android:src="@mipmap/ico_back"/>
+            <TextView
+                android:id="@+id/head_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:maxWidth="150dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:text="title"
+                android:textColor="?attr/toolbarTitelColor"
+                android:textSize="?attr/toolbarTitleSize"/>
+            <RelativeLayout
+                android:id="@+id/head_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:layout_marginRight="@dimen/normal_magin">
+                <ImageView
+                    android:id="@+id/head_imRight"
+                    android:layout_width="?attr/toolbarHeight"
+                    android:layout_height="?attr/toolbarHeight"
+                    android:src="@mipmap/ico_im_tab_guide"
+                    android:visibility="gone"
+                    android:scaleType="center"/>
+                <TextView
+                    android:id="@+id/head_txtRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/toolbarHeight"
+                    android:text="右边"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:maxWidth="100dp"
+                    android:textColor="?attr/toolbarRightTxtColor"
+                    android:textSize="?attr/toolbarRigthTxtSize"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <FrameLayout
+        android:id="@+id/flyMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 
 </LinearLayout>

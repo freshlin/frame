@@ -1,13 +1,35 @@
-<resources>
+<resources xmlns:ns1="http://schemas.android.com/tools">
 
+    <!--app主题背景-->
     <attr format="reference|color" name="appBackground"/>
+
+    <!--toolbar相关-->
+    <attr format="reference|color" name="toolbarBackground"/>
+    <attr format="dimension" name="toolbarHeight"/>
+
+    <attr format="dimension" name="toolbarTitleSize"/>
+    <attr format="dimension" name="toolbarRigthTxtSize"/>
+    <attr format="reference|color" name="toolbarTitelColor"/>
+    <attr format="reference|color" name="toolbarRightTxtColor"/>
+
+
+
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="appBackground">@color/theme</item>
+        <item name="android:windowTranslucentStatus" ns1:targetApi="19">true</item>
+        <item name="appBackground">@color/cl_white</item>
+        <item name="toolbarBackground">@color/cl_yellow</item>
+        <item name="toolbarHeight">@dimen/toolbar_height</item>
+        <item name="toolbarTitleSize">@dimen/toolbar_title_size</item>
+        <item name="toolbarRigthTxtSize">@dimen/toolbar_right_txt_size</item>
+        <item name="toolbarTitelColor">@color/cl_black</item>
+        <item name="toolbarRightTxtColor">@color/cl_black</item>
+
+
     </style>
 
 </resources>
