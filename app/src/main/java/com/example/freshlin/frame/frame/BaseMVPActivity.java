@@ -27,7 +27,6 @@ public abstract class BaseMVPActivity<V, T extends BasePresenter<V>> extends Bas
         super.onResume();
 
         presenter.attach((V)this);
-        //MobclickAgent.onResume(context);
     }
 
     @Override

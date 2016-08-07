@@ -40,8 +40,8 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-        initView();
-        initData();
+        bindView();
+        bindData();
     }
 
     private void init(){
@@ -78,15 +78,40 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
             }
         }
 
-        //如果是默认toolbar
-        if(!custumToolbar){
-            headLeft = (ImageView)findViewById(R.id.head_left);
-            headTitle = (TextView)findViewById(R.id.head_title);
-            headRight = (RelativeLayout)findViewById(R.id.head_right);
-            headRightIm = (ImageView)findViewById(R.id.head_imRight);
-            headRightTxt = (TextView)findViewById(R.id.head_txtRight);
-        }
+        headLeft = (ImageView)findViewById(R.id.head_left);
+        headTitle = (TextView)findViewById(R.id.head_title);
+        headRight = (RelativeLayout)findViewById(R.id.head_right);
+        headRightIm = (ImageView)findViewById(R.id.head_imRight);
+        headRightTxt = (TextView)findViewById(R.id.head_txtRight);
+
+        headLeft.setOnClickListener(onClickLisntner);
+
         flyMain.addView(view);
+    }
+
+    private View.OnClickListener onClickLisntner = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            if(v.getId() == R.id.head_left) onLeftClick(v);
+
+            else if(v.getId() == R.id.head_right)onRightClick(v);
+        }
+    };
+
+    /**
+     * 左边点击事件
+     * @param view
+     */
+    protected void onLeftClick(View view){
+        finish();
+    }
+
+    /**
+     * 右边点击事件
+     * @param view
+     */
+    protected  void onRightClick(View view){
+
     }
 
 
@@ -158,7 +183,7 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
      * 获取t状态栏高度
      * @return
      */
-    public int getStatusBarHeight() {
+    protected int getStatusBarHeight() {
         int result = 0;
         int resourceId = this.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if(resourceId > 0) {
@@ -168,6 +193,10 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
     }
 
 
+    /**
+     * LayoutId
+     * @return
+     */
     protected abstract int initLayoutId();
 
 }
