@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.example.freshlin.frame.R;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by freshlin on 2016/7/30.
  */
@@ -24,7 +26,7 @@ public class ImageTextButton extends RelativeLayout {
     private ImageView imageView;
     private TextView textView;
 
-    private Drawable backgroudDrawable, imageDrawable;
+    private WeakReference<Drawable> backgroudDrawable, imageDrawable;
     private String text;
     private int textSize;
     private int textColor;
@@ -46,8 +48,8 @@ public class ImageTextButton extends RelativeLayout {
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ImageTextButton, 0, 0);
         if(a != null) {
-            backgroudDrawable = a.getDrawable(R.styleable.ImageTextButton_backGroundDrawable);
-            imageDrawable = a.getDrawable(R.styleable.ImageTextButton_imageDrawable);
+            backgroudDrawable = new WeakReference<Drawable>(a.getDrawable(R.styleable.ImageTextButton_backGroundDrawable));
+            imageDrawable = new WeakReference<Drawable>(a.getDrawable(R.styleable.ImageTextButton_imageDrawable));
             text = a.getString(R.styleable.ImageTextButton_text);
             textSize =  a.getDimensionPixelSize(R.styleable.ImageTextButton_textSize, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 20, getResources().getDisplayMetrics()));
             textColor = a.getColor(R.styleable.ImageTextButton_textColor, Color.BLACK);
@@ -65,7 +67,7 @@ public class ImageTextButton extends RelativeLayout {
             lp.gravity = Gravity.CENTER_VERTICAL;
             imageView.setLayoutParams(lp);
             if(imageDrawable != null)
-                imageView.setImageDrawable(imageDrawable);
+                imageView.setImageDrawable(imageDrawable.get());
 
             textView = new TextView(context);
             textView.setLayoutParams(lp);
@@ -75,12 +77,24 @@ public class ImageTextButton extends RelativeLayout {
             textView.setTextSize(textSize);
 
             if(backgroudDrawable != null)
-                this.setBackground(backgroudDrawable);
+                this.setBackground(backgroudDrawable.get());
 
             linearLayout.addView(imageView);
             linearLayout.addView(textView);
 
+            backgroudDrawable.clear();
+            imageDrawable.clear();
+            imageView.getDrawable().setCallback(null);
+            imageView = null;
+
             this.addView(linearLayout);
         }
+    }
+
+    public void callbackDrawable(){
+        backgroudDrawable.clear();
+        imageDrawable.clear();
+        imageView.getDrawable().setCallback(null);
+        imageView = null;
     }
 }

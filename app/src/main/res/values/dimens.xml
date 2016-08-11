@@ -13,4 +13,6 @@
     <dimen name="small_txt_size">10sp</dimen>
     <dimen name="title_text_size">16sp</dimen>
     <dimen name="title_large_size">18sp</dimen>
+
+    <dimen name="test">200dp</dimen>
 </resources>

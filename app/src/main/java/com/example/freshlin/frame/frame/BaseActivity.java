@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.freshlin.frame.R;
+import com.example.freshlin.frame.aplication.BaseApplication;
 
 
 /**
@@ -28,6 +30,9 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
     private FrameLayout flyMain;
     private boolean custumToolbar; //true 自定义，fasle layout_base默认的
     private boolean translucentStatus;
+    private int toolbarHeight;
+
+    private BaseApplication app;
 
     private ImageView headLeft;
     private TextView headTitle;
@@ -45,16 +50,29 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
     }
 
     private void init(){
+
+        try {
+            this.app = (BaseApplication)this.getApplication();
+        } catch (Exception var4) {
+            System.exit(0);
+            return;
+        }
         layoutId = initLayoutId();
 
         setContentView(R.layout.layout_base);
 
-        if(layoutId == 0)
-            throw new RuntimeException("Please init your layoutId");
+        this.app.addActivity(this);
+
+//        if(layoutId == 0)
+//            throw new RuntimeException("Please init your layoutId");
 
         //是否影响效率
-        View view = LayoutInflater.from(this).inflate(layoutId, null);
-        this.toolbar = (Toolbar)view.findViewById(R.id.head_toolBar);
+        View view = null;
+
+        if(layoutId != 0) {
+            view = LayoutInflater.from(this).inflate(layoutId, null);
+            this.toolbar = (Toolbar) view.findViewById(R.id.head_toolBar);
+        }
 
         flyMain = (FrameLayout) findViewById(R.id.flyMain);
 
@@ -70,23 +88,36 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
 
         int statusBarHeight = getStatusBarHeight();
 
+        toolbarHeight = this.getResources().getDimensionPixelSize(R.dimen.toolbar_height);
         //状态栏与toolbar颜色相同
         if(this.translucentStatus && Build.VERSION.SDK_INT >= 19 && statusBarHeight > 0) {
             this.toolbar.setPadding(0, statusBarHeight, 0, 0);
+            toolbarHeight += statusBarHeight;
             if(this.toolbar.getLayoutParams() != null) {
-                this.toolbar.getLayoutParams().height = this.getResources().getDimensionPixelSize(R.dimen.toolbar_height) + statusBarHeight;
+                this.toolbar.getLayoutParams().height =  toolbarHeight;
             }
         }
 
-        headLeft = (ImageView)findViewById(R.id.head_left);
-        headTitle = (TextView)findViewById(R.id.head_title);
-        headRight = (RelativeLayout)findViewById(R.id.head_right);
-        headRightIm = (ImageView)findViewById(R.id.head_imRight);
-        headRightTxt = (TextView)findViewById(R.id.head_txtRight);
+        if(!custumToolbar) {
+            headLeft = (ImageView) findViewById(R.id.head_left);
+            headTitle = (TextView) findViewById(R.id.head_title);
+            headRight = (RelativeLayout) findViewById(R.id.head_right);
+            headRightIm = (ImageView) findViewById(R.id.head_imRight);
+            headRightTxt = (TextView) findViewById(R.id.head_txtRight);
 
-        headLeft.setOnClickListener(onClickLisntner);
+            headLeft.setOnClickListener(onClickLisntner);
+            headRight.setOnClickListener(onClickLisntner);
+        }
 
-        flyMain.addView(view);
+        if(view != null)
+            flyMain.addView(view);
+    }
+
+    public void removeAndFinish() {
+        if(this.app != null) {
+            this.app.remove(this);
+            finish();
+        }
     }
 
     private View.OnClickListener onClickLisntner = new View.OnClickListener(){
@@ -103,7 +134,7 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
      * @param view
      */
     protected void onLeftClick(View view){
-        finish();
+        removeAndFinish();
     }
 
     /**
@@ -170,6 +201,18 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
         headRightIm.setVisibility(View.GONE);
     }
 
+
+    protected Toolbar getToolbar(){
+        return this.toolbar;
+    }
+
+    protected void setToolbarBackground(int color){
+        this.toolbar.setBackgroundColor(color);
+    }
+
+    protected int getToolbarHeight(){
+        return toolbarHeight;
+    }
     /**
      *  隐藏toolbar
      */
@@ -177,6 +220,15 @@ public abstract class BaseActivity  extends AppCompatActivity implements IBaseAc
         if(toolbar == null)
             return;
         this.toolbar.setVisibility(View.GONE);
+    }
+
+    /**
+     * 展示toolBar
+     */
+    protected void displayToolBar(){
+        if(toolbar == null)
+            return;
+        this.toolbar.setVisibility(View.VISIBLE);
     }
 
     /**
