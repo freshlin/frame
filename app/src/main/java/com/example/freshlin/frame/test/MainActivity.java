@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.freshlin.frame.R;
 import com.example.freshlin.frame.example.TestNestedScrollViewActivity;
+import com.example.freshlin.frame.example.TestPathActivity;
 import com.example.freshlin.frame.example.TesteEficiency;
 import com.example.freshlin.frame.frame.BaseMVPActivity;
 import com.example.freshlin.frame.frame.IBaseActivity;
@@ -63,8 +64,9 @@ public class MainActivity extends BaseMVPActivity<IMainView, MainPresenter> impl
     @Override
     public void onClick(View v) {
 
-        startActivity(new Intent(this, TestNestedScrollViewActivity.class));
+        //startActivity(new Intent(this, TestNestedScrollViewActivity.class));
         //startActivity(new Intent(this, TesteEficiency.class));
+        startActivity(new Intent(this, TestPathActivity.class));
 
     }
 

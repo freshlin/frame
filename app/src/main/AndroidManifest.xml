@@ -29,6 +29,8 @@
 
         <activity android:name=".example.TesteEficiency"/>
 
+        <activity android:name=".example.TestPathActivity"/>
+
     </application>
 
 </manifest>
