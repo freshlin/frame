@@ -3,7 +3,6 @@ package com.example.freshlin.frame.example;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -12,7 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.example.freshlin.frame.R;
-import com.example.freshlin.frame.frame.BaseActivity;
+import com.example.freshlin.frame.frame.activity.BaseActivity;
 
 /** 效率测试
  * Created by freshlin on 2016/8/10.

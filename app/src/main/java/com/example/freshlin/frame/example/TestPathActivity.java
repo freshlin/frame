@@ -5,8 +5,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.freshlin.frame.R;
-import com.example.freshlin.frame.frame.BaseActivity;
-import com.example.freshlin.frame.wigit.ShareView;
+import com.example.freshlin.frame.frame.activity.BaseActivity;
+import com.example.freshlin.frame.frame.wigit.ShareView;
 
 /**
  * Created by freshlin on 2016/8/12.

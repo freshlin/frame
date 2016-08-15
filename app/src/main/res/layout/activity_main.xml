@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.example.freshlin.frame.wigit.ImageTextButton
+    <com.example.freshlin.frame.frame.wigit.ImageTextButton
         android:id="@+id/itbtnTest"
         android:layout_width="match_parent"
         android:layout_height="48dp"

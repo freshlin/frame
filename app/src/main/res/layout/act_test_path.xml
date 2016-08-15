@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.freshlin.frame.wigit.ShareView
+        <com.example.freshlin.frame.frame.wigit.ShareView
             android:id="@+id/myPath"
             android:layout_width="match_parent"
             android:background="@color/colorPrimaryDark"
@@ -99,7 +99,7 @@
                     android:layout_centerInParent="true"
                     android:scaleType="fitXY"/>
             </RelativeLayout>
-        </com.example.freshlin.frame.wigit.ShareView>
+        </com.example.freshlin.frame.frame.wigit.ShareView>
 
         <Button
             android:layout_alignParentBottom="true"

@@ -1,16 +1,14 @@
 package com.example.freshlin.frame.example;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.ScrollView;
 
 import com.example.freshlin.frame.R;
-import com.example.freshlin.frame.frame.BaseActivity;
+import com.example.freshlin.frame.frame.activity.BaseActivity;
 
 /**
  * Created by freshlin on 2016/8/9.
@@ -39,7 +37,7 @@ public class TestNestedScrollViewActivity extends BaseActivity{
     public void bindView() {
 
         toolbar = getToolbar();
-        toolbar.setAlpha(0);
+       // toolbar.setAlpha(0);
 
         final int h = getResources().getDimensionPixelSize(R.dimen.test);
         final float value = 1.0f / h;

@@ -3,7 +3,7 @@ package com.example.freshlin.frame.example;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.example.freshlin.frame.frame.BaseActivity;
+import com.example.freshlin.frame.frame.activity.BaseActivity;
 
 /**
  * Created by freshlin on 2016/8/13.

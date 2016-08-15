@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.freshlin.frame.R;
-import com.example.freshlin.frame.frame.BaseActivity;
+import com.example.freshlin.frame.frame.activity.BaseActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
