@@ -14,8 +14,8 @@ import android.support.annotation.CallSuper;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.freshlin.frame.frame.helper.ShareHelper;
-import com.example.freshlin.frame.frame.utils.XlUtils;
+import com.example.freshlin.frame.frame.utils.ShareUtils;
+import com.example.freshlin.frame.frame.utils.CommonUtils;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,7 +40,7 @@ public class BaseApplication extends Application{
     public void onCreate() {
         super.onCreate();
 
-        String processName  = XlUtils.getProccesName(this, Process.myPid());
+        String processName  = CommonUtils.getProccesName(this, Process.myPid());
 
         if(processName != null) {
             Log.e("xxxx", "Application start! process:" + processName);
@@ -173,7 +173,7 @@ public class BaseApplication extends Application{
                             result = netInfo.getType();
                         }
 
-                        (ShareHelper.getInstace(getBaseContext())).putValue("NET_STATUS", result);
+                        (ShareUtils.getInstace(getBaseContext())).putValue("NET_STATUS", result);
                         BaseApplication.this.sendBroadcast(new Intent("com.fl.frame.ACTION_NET_CHANGE"));
                     }
 
@@ -183,7 +183,7 @@ public class BaseApplication extends Application{
         }
 
         this.registerReceiver(this.receiver, filter);
-        ShareHelper.getInstace(getApplicationContext()).putValue("NET_STATUS", 1);
+        ShareUtils.getInstace(getApplicationContext()).putValue("NET_STATUS", 1);
         this.acts = new CopyOnWriteArrayList();
         this.hashMap = new HashMap();
     }
