@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/llyBase"
     android:layout_width="match_parent"
@@ -14,12 +15,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
+            <com.example.freshlin.xl.frame.wigit.TintImageView
                 android:id="@+id/head_left"
                 android:layout_width="?attr/toolbarHeight"
                 android:layout_height="?attr/toolbarHeight"
                 android:scaleType="center"
-                android:src="@mipmap/ico_back"/>
+                app:drawableTint="@drawable/back_selector"
+                android:src="@mipmap/ico_back" />
             <TextView
                 android:id="@+id/head_title"
                 android:layout_width="wrap_content"

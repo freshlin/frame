@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<acts>
+    <act>
+        <name>TestActivity</name>
+        <info>其他测试</info>
+    </act>
+    <act>
+        <name>TestActivity</name>
+        <info>其他测试</info>
+    </act>
+    <act>
+        <name>TestActivity</name>
+        <info>其他测试</info>
+    </act>
+    <act>
+        <name>TestActivity</name>
+        <info>其他测试</info>
+    </act>
+
+</acts>

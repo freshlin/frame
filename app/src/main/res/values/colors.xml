@@ -6,4 +6,9 @@
     <color name="cl_white">#F5F5F5</color>
     <color name="cl_yellow">#FFB400</color>
     <color name="cl_black">#FF000000</color>
+    <color name="cl_divider_gray">#DCDCDC</color>
+    <color name="cl_item_ed">#DCDCDC</color>
+    <color name="cl_item_def">#F5F5F5</color>
+
+
 </resources>

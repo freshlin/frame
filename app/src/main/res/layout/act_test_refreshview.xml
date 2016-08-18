@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.freshlin.frame.frame.wigit.MyRfreshRecyClerView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.freshlin.xl.frame.wigit.TestRefreshRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/testRefreshRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/cl_yellow"
-        android:text="测试下拉"/>
+        android:layout_height="120dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="测试下拉刷新" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myRecylerview"
         android:layout_width="match_parent"
+        android:background="@color/cl_white"
         android:layout_height="match_parent"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/cl_black"
+        android:layout_height="120dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
         android:text="测试上拉"/>
 
 
-</com.example.freshlin.frame.frame.wigit.MyRfreshRecyClerView>
+</com.example.freshlin.xl.frame.wigit.TestRefreshRecyclerView>

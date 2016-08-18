@@ -21,15 +21,26 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus" ns1:targetApi="19">true</item>
-        <item name="appBackground">@color/cl_white</item>
+        <item name="appBackground">@color/cl_divider_gray</item>
         <item name="toolbarBackground">@color/cl_yellow</item>
         <item name="toolbarHeight">@dimen/toolbar_height</item>
         <item name="toolbarTitleSize">@dimen/toolbar_title_size</item>
         <item name="toolbarRigthTxtSize">@dimen/toolbar_right_txt_size</item>
         <item name="toolbarTitelColor">@color/cl_black</item>
         <item name="toolbarRightTxtColor">@color/cl_black</item>
+    </style>
 
+    <style name="customDialog" parent="android:Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
+    <style name="dialogFade">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
     </style>
 
 </resources>
