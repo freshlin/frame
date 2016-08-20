@@ -9,6 +9,8 @@ import android.view.View;
 
 
 import com.example.freshlin.R;
+import com.example.freshlin.xl.example.activity.CameraActivity;
+import com.example.freshlin.xl.example.activity.PerformanceActivity;
 import com.example.freshlin.xl.example.activity.ShareActivity;
 import com.example.freshlin.xl.example.activity.TestActivity;
 import com.example.freshlin.xl.example.activity.TestMyRefreshViewActivity;
@@ -75,6 +77,8 @@ public class MainActivity extends BaseMVPActivity<IMainView, MainPresenter> impl
         datas.add("refeshRecyclerview(基于NestedScrollingParent实现)");
         datas.add("NestedScrollView测试");
         datas.add("测试换字体+ TextView跑马灯效果");
+        datas.add("相机，相册");
+        datas.add("性能优化");
         datas.add("其他测试");
 
         adapter = new RefreshAdapter(this, datas);
@@ -131,6 +135,12 @@ public class MainActivity extends BaseMVPActivity<IMainView, MainPresenter> impl
                 intent.setClass(this, TestSetFactoryAct.class);
                 break;
             case 5:
+                intent.setClass(this, CameraActivity.class);
+                break;
+            case 6:
+                intent.setClass(this, PerformanceActivity.class);
+                break;
+            case 7:
                 intent.setClass(this, TestActivity.class);
                 break;
         }

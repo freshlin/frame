@@ -1,8 +1,8 @@
 package com.example.freshlin.xl.frame.dialog;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDialog;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -11,7 +11,7 @@ import com.example.freshlin.R;
 /**
  * Created by xl on 2016/8/17.
  */
-public abstract class BaseDialog extends Dialog {
+public abstract class BaseDialog extends AppCompatDialog {
 
     public BaseDialog(Context context) {
         this(context, R.style.customDialog);

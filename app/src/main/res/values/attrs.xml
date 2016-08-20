@@ -10,4 +10,10 @@
     <declare-styleable name="TintImageView">
         <attr name="drawableTint" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="RootSurfaceView">
+        <attr name="backResouce" format="reference" />
+        <attr name="view_width" format="dimension" />
+        <attr name="view_height" format="dimension" />
+    </declare-styleable>
 </resources>

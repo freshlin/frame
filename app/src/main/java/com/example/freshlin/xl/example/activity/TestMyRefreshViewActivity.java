@@ -28,10 +28,8 @@ import java.util.List;
  * Created by xl on 2016/8/15.
  */
 public class TestMyRefreshViewActivity extends BaseActivity implements IAdapterListener{
-
     private TestRefreshRecyclerView testRefreshRecyclerView;
 
-    private RecyclerView myRecylerview;
 
     private RefreshAdapter adapter;
     private List<String> datas = new ArrayList<String>();
@@ -51,7 +49,6 @@ public class TestMyRefreshViewActivity extends BaseActivity implements IAdapterL
     public void bindView() {
         hideToolBar();
         testRefreshRecyclerView = (TestRefreshRecyclerView)findViewById(R.id.testRefreshRecyclerView);
-        myRecylerview = (RecyclerView) findViewById(R.id.myRecylerview);
 
         testRefreshRecyclerView.setRefreshListener(new RfreshRecyClerView.RefreshListener() {
             @Override
@@ -100,10 +97,9 @@ public class TestMyRefreshViewActivity extends BaseActivity implements IAdapterL
             adapter.setHeaderId(R.layout.adapter_header_base);
             //adapter.setFooterId(R.layout.adapter_footer_base);
 
-            myRecylerview.setAdapter(adapter);
-            myRecylerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-            myRecylerview.addItemDecoration(new DefaultItemDecoration(getResources().getDrawable(R.drawable.divider_default), DefaultItemDecoration.GRID));
+            testRefreshRecyclerView.setAdapter(adapter);
+            testRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            testRefreshRecyclerView.setItemDecoration(new DefaultItemDecoration(getResources().getDrawable(R.drawable.divider_default), DefaultItemDecoration.GRID));
             adapter.notifyDataSetChanged();
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();

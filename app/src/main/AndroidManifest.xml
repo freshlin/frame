@@ -13,6 +13,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:hardwareAccelerated="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".xl.example.mvpexp.MainActivity">
@@ -24,15 +25,16 @@
         </activity>
 
         <activity android:name=".xl.example.activity.TestSetFactoryAct"/>
-
         <activity android:name=".xl.example.activity.TestNestedScrollViewActivity"/>
-
         <activity android:name=".xl.example.activity.TesteEficiency"/>
-
         <activity android:name=".xl.example.activity.ShareActivity"/>
         <activity android:name=".xl.example.activity.TestMyRefreshViewActivity" />
-
         <activity android:name=".xl.example.activity.TestActivity"/>
+        <activity android:name=".xl.example.activity.CameraActivity"/>
+        <activity
+            android:name=".xl.example.activity.PerformanceActivity"
+            android:launchMode="singleTask"/>
+
 
         <service android:name=".xl.example.service.MyAccessibilityService"
             android:description="@string/app_name"
