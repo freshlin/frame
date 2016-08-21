@@ -95,11 +95,12 @@ public class TestMyRefreshViewActivity extends BaseActivity implements IAdapterL
             adapter = new RefreshAdapter(this, datas);
             adapter.setAdapterListner(this);
             adapter.setHeaderId(R.layout.adapter_header_base);
+            adapter.attachToRecyclerView(testRefreshRecyclerView.getRecyclerView());
             //adapter.setFooterId(R.layout.adapter_footer_base);
 
             testRefreshRecyclerView.setAdapter(adapter);
             testRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-            testRefreshRecyclerView.setItemDecoration(new DefaultItemDecoration(getResources().getDrawable(R.drawable.divider_default), DefaultItemDecoration.GRID));
+            testRefreshRecyclerView.setItemDecoration(new DefaultItemDecoration(getResources().getDrawable(R.drawable.divider_default), DefaultItemDecoration.VERTICAL));
             adapter.notifyDataSetChanged();
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();

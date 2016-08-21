@@ -25,15 +25,15 @@ public abstract class BaseRecycerAdaper<T> extends RecyclerView.Adapter<Recycler
     protected final int FOOTER_TYPE = 0;
     protected final int ADAPTER_TYPE = 1;
 
-    private List<T> datas;
+    protected List<T> datas;
 
-    private int headerId;
+    protected int headerId;
 
-    private int footerId;
+    protected int footerId;
 
     protected LayoutInflater layoutInflater;
 
-    private IAdapterListener adapterListener;
+    protected IAdapterListener adapterListener;
 
     protected IHeaderViewListner headerViewListner;
 

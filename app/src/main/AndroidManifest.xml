@@ -8,6 +8,11 @@
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
+
+
+
     <application
         android:name="com.example.freshlin.xl.frame.aplication.BaseApplication"
         android:allowBackup="true"
@@ -48,6 +53,7 @@
             android:resource='@xml/accessibilityservice' />
         </service>
 
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     </application>
 
 </manifest>

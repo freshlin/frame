@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class CommonUtils {
 
+    private static long lastTime;
 
     public static String getProccesName(Context context, int pid){
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -32,5 +33,15 @@ public class CommonUtils {
         }while (pid != processInfo.pid);
 
         return processInfo.processName;
+    }
+
+    public static boolean isFastClick() {
+        long curTime = System.currentTimeMillis();
+        if(curTime - lastTime < 500L) {
+            return true;
+        } else {
+            lastTime = curTime;
+            return false;
+        }
     }
 }

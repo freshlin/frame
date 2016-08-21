@@ -2,9 +2,14 @@ package com.example.freshlin.xl.example.mvpexp;
 
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 
@@ -21,10 +26,15 @@ import com.example.freshlin.xl.example.adapter.RefreshAdapter;
 import com.example.freshlin.xl.example.bean.Act;
 import com.example.freshlin.xl.frame.activity.BaseMVPActivity;
 import com.example.freshlin.xl.frame.activity.IBaseActivity;
+import com.example.freshlin.xl.frame.adapter.SimpleItemTouchHelperCallback;
 import com.example.freshlin.xl.frame.decoration.DefaultItemDecoration;
 import com.example.freshlin.xl.frame.listener.IAdapterListener;
 import com.example.freshlin.xl.frame.utils.ParseUtils;
+import com.example.freshlin.xl.frame.utils.SDCardUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -71,6 +81,7 @@ public class MainActivity extends BaseMVPActivity<IMainView, MainPresenter> impl
     public void bindData() {
 
         pullParse();
+        test();
 
         datas.add("按钮点击（类似path效果）");
         datas.add("效率测试");
@@ -82,11 +93,12 @@ public class MainActivity extends BaseMVPActivity<IMainView, MainPresenter> impl
         datas.add("其他测试");
 
         adapter = new RefreshAdapter(this, datas);
+        adapter.attachToRecyclerView(recyclerNavagation);
         adapter.setAdapterListner(this);
         recyclerNavagation.setAdapter(adapter);
+        //recyclerNavagation.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerNavagation.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerNavagation.addItemDecoration(new DefaultItemDecoration(getResources().getDrawable(R.drawable.divider_default), DefaultItemDecoration.VERTICAL));
-
         adapter.notifyDataSetChanged();
     }
 
@@ -103,6 +115,41 @@ public class MainActivity extends BaseMVPActivity<IMainView, MainPresenter> impl
 
     }
 
+
+    private static final String CATCH_PATH = Environment.getDownloadCacheDirectory().getPath()+ "/qr";
+    private static final String DATA_PATH = Environment.getDataDirectory().getPath() + "/qr";
+
+
+    private void test() {
+
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
+        //String s = filePath + "qr";
+        String s = DATA_PATH;
+
+        File dir = new File(s);
+        dir.mkdir();
+
+
+        File file = new File(s, System.currentTimeMillis() + ".png");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ico_mine_wechart);
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
 
 
 

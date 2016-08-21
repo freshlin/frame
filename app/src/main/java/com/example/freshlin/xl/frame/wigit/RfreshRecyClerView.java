@@ -1,6 +1,7 @@
 package com.example.freshlin.xl.frame.wigit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.support.v4.view.NestedScrollingParent;
 import android.support.v7.widget.LinearLayoutManager;
@@ -59,8 +60,7 @@ public abstract class RfreshRecyClerView extends LinearLayout implements NestedS
         bottomView = initBottomView();
 
         recyclerView = new RecyclerView(context);
-
-        DisplayMetrics displayMetrics =  getResources().getDisplayMetrics();
+        recyclerView.setBackgroundColor(Color.WHITE);
 
         Point point = ScreenUtils.sceenWidthHeight(context);
         screenWidth = point.x;
@@ -361,5 +361,9 @@ public abstract class RfreshRecyClerView extends LinearLayout implements NestedS
 
     public void setItemDecoration(RecyclerView.ItemDecoration itemDecoration){
         recyclerView.addItemDecoration(itemDecoration);
+    }
+
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
     }
 }

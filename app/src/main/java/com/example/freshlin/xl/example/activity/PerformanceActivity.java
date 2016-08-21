@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -25,11 +26,11 @@ public class PerformanceActivity extends BaseActivity implements ComponentCallba
     private TintImageView imTint;
     private ViewStub viewStub;
     private LinearLayout linearLayout;
-    private Bitmap bitmap;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bitmap.recycle();
+        ItemTouchHelper itemTouchHelper;
     }
 
     @Override
