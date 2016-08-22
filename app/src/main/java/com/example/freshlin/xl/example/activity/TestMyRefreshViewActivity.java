@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.freshlin.R;
@@ -18,7 +18,7 @@ import com.example.freshlin.xl.frame.decoration.DefaultItemDecoration;
 import com.example.freshlin.xl.frame.listener.IAdapterListener;
 import com.example.freshlin.xl.frame.listener.IFooterViewListner;
 import com.example.freshlin.xl.frame.listener.IHeaderViewListner;
-import com.example.freshlin.xl.frame.wigit.RfreshRecyClerView;
+import com.example.freshlin.xl.frame.wigit.RefreshRecyClerView;
 import com.example.freshlin.xl.frame.wigit.TestRefreshRecyclerView;
 
 import java.util.ArrayList;
@@ -50,14 +50,16 @@ public class TestMyRefreshViewActivity extends BaseActivity implements IAdapterL
         hideToolBar();
         testRefreshRecyclerView = (TestRefreshRecyclerView)findViewById(R.id.testRefreshRecyclerView);
 
-        testRefreshRecyclerView.setRefreshListener(new RfreshRecyClerView.RefreshListener() {
+        testRefreshRecyclerView.setRefreshListener(new RefreshRecyClerView.RefreshListener() {
             @Override
             public void pullDownRefresh() {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         datas.add(0,"0");
-                        adapter.notifyDataSetChanged();
+                       // adapter.notifyDataSetChanged();
+                        //adapter.notifyItemChanged(0);
+                        adapter.notifyItemInserted(1);
                         testRefreshRecyclerView.refreshEnd();
                     }
                 }, 1000);
@@ -69,7 +71,7 @@ public class TestMyRefreshViewActivity extends BaseActivity implements IAdapterL
                     @Override
                     public void run() {
                         datas.add(datas.size(), datas.size() + "");
-                        adapter.notifyDataSetChanged();
+                        adapter.notifyItemChanged(datas.size());
                         testRefreshRecyclerView.refreshEnd();
                     }
                 }, 1000);
@@ -97,10 +99,11 @@ public class TestMyRefreshViewActivity extends BaseActivity implements IAdapterL
             adapter.setHeaderId(R.layout.adapter_header_base);
             adapter.attachToRecyclerView(testRefreshRecyclerView.getRecyclerView());
             //adapter.setFooterId(R.layout.adapter_footer_base);
-
-            testRefreshRecyclerView.setAdapter(adapter);
+            //testRefreshRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
             testRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             testRefreshRecyclerView.setItemDecoration(new DefaultItemDecoration(getResources().getDrawable(R.drawable.divider_default), DefaultItemDecoration.VERTICAL));
+            testRefreshRecyclerView.setAdapter(adapter);
+
             adapter.notifyDataSetChanged();
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();

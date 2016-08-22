@@ -95,10 +95,11 @@ public class MainActivity extends BaseMVPActivity<IMainView, MainPresenter> impl
         adapter = new RefreshAdapter(this, datas);
         adapter.attachToRecyclerView(recyclerNavagation);
         adapter.setAdapterListner(this);
-        recyclerNavagation.setAdapter(adapter);
-        //recyclerNavagation.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerNavagation.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerNavagation.addItemDecoration(new DefaultItemDecoration(getResources().getDrawable(R.drawable.divider_default), DefaultItemDecoration.VERTICAL));
+        recyclerNavagation.setAdapter(adapter);
+       // recyclerNavagation.setLayoutManager(new GridLayoutManager(this, 4));
+
         adapter.notifyDataSetChanged();
     }
 

@@ -6,8 +6,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/act_main_recyclerNavagation"
-        android:background="@color/cl_white"
         android:layout_width="match_parent"
+        android:background="@color/cl_white"
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>

@@ -1,7 +1,9 @@
 package com.example.freshlin.xl.frame.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +58,22 @@ public abstract class BaseRecycerAdaper<T> extends RecyclerView.Adapter<Recycler
         return datas.size() + (headerId != 0 ? 1 : 0) + (footerId != 0 ? 1 : 0);
     }
 
+    public int getDataStartPosition(){
+        return headerId == 0 ? 0 : 1;
+    }
+
+    public int getDataEndPosition(){
+        return headerId == 0 ? datas.size() - 1 : datas.size();
+    }
+
+
+    public int getTrueItemCount(){
+        int count = datas.size();
+        if(headerId != 0)count += 1;
+        if(footerId != 0)count += 1;
+        return count;
+    }
+
 
 
     public T getItem(int position){
@@ -74,6 +92,48 @@ public abstract class BaseRecycerAdaper<T> extends RecyclerView.Adapter<Recycler
             type = ADAPTER_TYPE;
 
         return type;
+    }
+
+
+    /**
+     * setLayoutManager 必须放在
+     * @param recyclerView
+     */
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+
+        if(manager == null)
+            throw new RuntimeException("setLayoutManager must ahead of setAdapter!");
+
+        if(manager instanceof GridLayoutManager){
+            final GridLayoutManager gridLayoutManager = (GridLayoutManager)manager;
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    return (getItemViewType(position) == HEADER_TYPE || getItemViewType(position) == FOOTER_TYPE) ? gridLayoutManager.getSpanCount() : 1;
+                }
+            });
+        }
+    }
+
+
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+
+        if(getItemViewType(holder.getLayoutPosition()) != HEADER_TYPE)
+            return;
+
+        if(getItemViewType(holder.getLayoutPosition()) != FOOTER_TYPE)
+            return;
+
+        ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
+        if(lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
+            StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
+            p.setFullSpan(true);
+        }
     }
 
     @Override

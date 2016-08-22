@@ -4,10 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.support.v4.view.NestedScrollingParent;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
@@ -20,7 +21,7 @@ import com.example.freshlin.xl.frame.utils.ScreenUtils;
 /**
  * Created by xl on 2016/8/15.
  */
-public abstract class RfreshRecyClerView extends LinearLayout implements NestedScrollingParent{
+public abstract class RefreshRecyClerView extends LinearLayout implements NestedScrollingParent{
 
     private int pullDownState = 0; // -3 -2  -1 0 1 2
     private int pullUpStae = 0;
@@ -38,17 +39,18 @@ public abstract class RfreshRecyClerView extends LinearLayout implements NestedS
     private boolean pullUp;
     private Scroller scroller;
     private int touchSlop;
+    private float velocityY;
 
 
-    public RfreshRecyClerView(Context context) {
+    public RefreshRecyClerView(Context context) {
         this(context, null);
     }
 
-    public RfreshRecyClerView(Context context, AttributeSet attrs) {
+    public RefreshRecyClerView(Context context, AttributeSet attrs) {
         this(context, attrs, 1);
     }
 
-    public RfreshRecyClerView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RefreshRecyClerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -61,6 +63,23 @@ public abstract class RfreshRecyClerView extends LinearLayout implements NestedS
 
         recyclerView = new RecyclerView(context);
         recyclerView.setBackgroundColor(Color.WHITE);
+
+
+       int range =  recyclerView.computeVerticalScrollRange();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                    int xx = 1;
+                    int yy = 2;
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
 
         Point point = ScreenUtils.sceenWidthHeight(context);
         screenWidth = point.x;
@@ -224,10 +243,24 @@ public abstract class RfreshRecyClerView extends LinearLayout implements NestedS
 
         int scrollY = getScrollY();
 
-        LinearLayoutManager linearLayoutManager =  (LinearLayoutManager)recyclerView.getLayoutManager();
 
-        int fisrtposition = linearLayoutManager .findFirstCompletelyVisibleItemPosition();
-        int lastposition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+        int fisrtposition = -1;
+        int lastposition = -1;
+
+        if(recyclerView.getLayoutManager() instanceof GridLayoutManager){
+            GridLayoutManager gridLayoutManager = (GridLayoutManager)recyclerView.getLayoutManager();
+            fisrtposition = gridLayoutManager .findFirstCompletelyVisibleItemPosition();
+            lastposition = gridLayoutManager.findLastCompletelyVisibleItemPosition();
+        }else if(recyclerView.getLayoutManager() instanceof LinearLayoutManager){
+            LinearLayoutManager linearLayoutManager =  (LinearLayoutManager)recyclerView.getLayoutManager();
+            if(LinearLayoutManager.HORIZONTAL == linearLayoutManager.getOrientation()) {
+                throw new RuntimeException("暂不支持横向");
+            }
+            fisrtposition = linearLayoutManager .findFirstCompletelyVisibleItemPosition();
+            lastposition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+        }else if(recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager){
+            throw new RuntimeException("暂不支持");
+        }
 
         if(dy < 0  && scrollY <= 0 && fisrtposition == 0){
             pullDown = true;
@@ -292,6 +325,7 @@ public abstract class RfreshRecyClerView extends LinearLayout implements NestedS
         return consumed;
     }
 
+
     @Override
     public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
         if(getScrollY() > 0 && velocityY  < 0)
@@ -355,8 +389,9 @@ public abstract class RfreshRecyClerView extends LinearLayout implements NestedS
     public void setAdapter(BaseRecycerAdaper adapter){
         recyclerView.setAdapter(adapter);
     }
-    public void setLayoutManager(LinearLayoutManager layoutManager){
+    public void setLayoutManager(RecyclerView.LayoutManager layoutManager){
         recyclerView.setLayoutManager(layoutManager);
+
     }
 
     public void setItemDecoration(RecyclerView.ItemDecoration itemDecoration){

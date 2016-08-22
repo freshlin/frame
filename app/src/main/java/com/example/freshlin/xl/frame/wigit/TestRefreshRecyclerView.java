@@ -11,7 +11,7 @@ import com.example.freshlin.R;
 /**
  * Created by xl on 2016/8/17.
  */
-public class TestRefreshRecyclerView extends RfreshRecyClerView{
+public class TestRefreshRecyclerView extends RefreshRecyClerView {
 
     public TestRefreshRecyclerView(Context context) {
         this(context, null);

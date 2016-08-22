@@ -9,6 +9,7 @@
     <color name="cl_divider_gray">#DCDCDC</color>
     <color name="cl_item_ed">#F0DCDCDC</color>
     <color name="cl_item_def">#F5F5F5</color>
+    <color name="cl_transparent">#00000000</color>
 
 
 
